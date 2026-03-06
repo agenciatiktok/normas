@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lo que TikTok no te explica — Agencia TikTok LIVE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #ff0050;
+  --cyan: #00f2ea;
+  --yellow: #ffcc00;
+  --green: #00e096;
+  --orange: #ff6b2b;
+  --bg: #080810;
+  --surface: #0f0f1a;
+  --surface2: #14141f;
+  --surface3: #1a1a28;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.1);
+  --text: #eeeef5;
+  --muted: #6b6b8a;
+  --serif: 'Playfair Display', serif;
+  --sans: 'Syne', sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.75;
+  overflow-x:hidden;
+}
+
+/* GRAIN */
+body::after{
+  content:'';
+  position:fixed;inset:0;z-index:999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.5;
+}
+
+/* PROGRESS */
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),var(--cyan));z-index:200;width:0%;transition:width .1s;}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,16,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:all .3s;
+}
+.nav-logo{
+  font-family:var(--serif);
+  font-size:15px;
+  background:linear-gradient(135deg,var(--red),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  font-weight:700;
+}
+.nav-count{
+  font-size:11px;color:var(--muted);
+  letter-spacing:.1em;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+  position:relative;overflow:hidden;
+}
+
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(255,0,80,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,242,234,0.06) 0%, transparent 60%);
+}
+
+/* Geometric shapes */
+.geo{position:absolute;pointer-events:none;}
+.geo-1{
+  width:400px;height:400px;
+  border:1px solid rgba(255,0,80,0.08);
+  border-radius:50%;
+  top:-100px;left:-100px;
+  animation:spin 30s linear infinite;
+}
+.geo-2{
+  width:300px;height:300px;
+  border:1px solid rgba(0,242,234,0.06);
+  border-radius:50%;
+  bottom:-50px;right:-50px;
+  animation:spin 20s linear infinite reverse;
+}
+.geo-3{
+  width:200px;height:200px;
+  border:1px solid rgba(255,204,0,0.05);
+  top:50%;right:10%;
+  transform:translateY(-50%) rotate(45deg);
+  animation:float 8s ease-in-out infinite;
+}
+.geo-4{
+  width:2px;height:200px;
+  background:linear-gradient(to bottom,transparent,rgba(255,0,80,0.3),transparent);
+  left:15%;top:20%;
+  animation:float 6s ease-in-out infinite 1s;
+}
+.geo-5{
+  width:200px;height:2px;
+  background:linear-gradient(to right,transparent,rgba(0,242,234,0.3),transparent);
+  right:10%;top:30%;
+  animation:float 7s ease-in-out infinite 2s;
+}
+
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,0,80,0.08);
+  border:1px solid rgba(255,0,80,0.2);
+  color:var(--red);
+  padding:8px 20px;border-radius:100px;
+  font-size:11px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:32px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s ease both;
+}
+.hero-eyebrow span{
+  width:6px;height:6px;
+  background:var(--red);border-radius:50%;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(1.8);}}
+
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(48px,9vw,100px);
+  line-height:.95;
+  margin-bottom:24px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .1s ease both;
+}
+.hero-title em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--red) 0%,var(--orange) 50%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.hero-sub{
+  font-size:18px;color:var(--muted);font-weight:400;
+  max-width:500px;margin:0 auto 48px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .2s ease both;
+  line-height:1.6;
+}
+
+.hero-stat-row{
+  display:flex;gap:0;
+  position:relative;z-index:1;
+  border:1px solid var(--border2);
+  border-radius:20px;
+  overflow:hidden;
+  animation:fadeUp .8s .3s ease both;
+  max-width:600px;
+  width:100%;
+}
+.hero-stat{
+  flex:1;padding:24px 20px;text-align:center;
+  border-right:1px solid var(--border2);
+  background:rgba(255,255,255,0.02);
+}
+.hero-stat:last-child{border-right:none;}
+.hero-stat-num{
+  font-family:var(--serif);font-size:36px;
+  background:linear-gradient(135deg,var(--red),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:block;line-height:1;margin-bottom:4px;
+}
+.hero-stat-label{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;}
+
+.scroll-cue{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--muted);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  z-index:1;animation:fadeUp .8s .6s ease both;
+}
+.scroll-line{
+  width:1px;height:50px;
+  background:linear-gradient(to bottom,var(--red),transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:1;transform:scaleY(1);}50%{opacity:.3;transform:scaleY(.5);}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* CONTENT */
+.content{max-width:820px;margin:0 auto;padding:0 24px 120px;position:relative;z-index:1;}
+
+/* SECTION */
+.section{padding:80px 0 20px;opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.section.visible{opacity:1;transform:translateY(0);}
+
+.section-num{
+  font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--red);margin-bottom:12px;
+  display:flex;align-items:center;gap:12px;
+}
+.section-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,0,80,.3),transparent);}
+
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(30px,5vw,52px);
+  line-height:1.1;margin-bottom:28px;
+}
+.section-title em{font-style:italic;color:var(--cyan);}
+
+.section p{color:rgba(238,238,245,.8);margin-bottom:20px;}
+.section p strong{color:var(--text);}
+
+/* INTRO CARD */
+.intro-card{
+  background:linear-gradient(135deg,rgba(255,0,80,.06),rgba(0,242,234,.04));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;padding:36px 40px;margin:32px 0;
+  position:relative;overflow:hidden;
+}
+.intro-card::before{
+  content:'';position:absolute;
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(255,0,80,.08),transparent);
+  top:-100px;right:-100px;border-radius:50%;
+}
+.intro-card-icon{font-size:32px;margin-bottom:16px;display:block;}
+.intro-card p{margin:0;font-size:16px;line-height:1.7;position:relative;z-index:1;}
+
+/* BIG NUMBER */
+.big-number-block{
+  display:grid;grid-template-columns:auto 1fr;gap:24px;
+  align-items:center;
+  background:var(--surface2);
+  border:1px solid var(--border2);
+  border-radius:24px;padding:36px 40px;margin:32px 0;
+}
+.big-number{
+  font-family:var(--serif);font-size:80px;line-height:1;
+  background:linear-gradient(135deg,var(--red),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  white-space:nowrap;
+}
+.big-number-text p{margin:0;font-size:15px;color:rgba(238,238,245,.8);}
+.big-number-text strong{color:var(--text);font-size:16px;display:block;margin-bottom:6px;}
+
+/* HIGHLIGHT */
+.highlight{
+  border-left:3px solid var(--red);
+  border-radius:0 16px 16px 0;
+  padding:24px 28px;margin:32px 0;
+  background:linear-gradient(135deg,rgba(255,0,80,.06),rgba(255,0,80,.02));
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(18px,3vw,24px);line-height:1.4;
+}
+
+/* CALLOUT */
+.callout{border-radius:20px;padding:28px 32px;margin:28px 0;}
+.callout-red{background:linear-gradient(135deg,rgba(255,0,80,.08),rgba(255,0,80,.03));border:1px solid rgba(255,0,80,.2);}
+.callout-cyan{background:linear-gradient(135deg,rgba(0,242,234,.07),rgba(0,242,234,.02));border:1px solid rgba(0,242,234,.2);}
+.callout-yellow{background:linear-gradient(135deg,rgba(255,204,0,.07),rgba(255,204,0,.02));border:1px solid rgba(255,204,0,.2);}
+.callout-icon{font-size:22px;margin-bottom:10px;display:block;}
+.callout-title{font-family:var(--serif);font-size:18px;margin-bottom:8px;}
+.callout p{margin:0;font-size:14px;color:rgba(238,238,245,.75);}
+
+/* NORMA CARDS */
+.normas-grid{display:flex;flex-direction:column;gap:20px;margin:32px 0;}
+
+.norma-card{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:24px;overflow:hidden;
+  transition:border-color .3s,transform .2s;
+}
+.norma-card:hover{transform:translateY(-3px);border-color:var(--border2);}
+
+.norma-card.danger{border-left:3px solid var(--red);}
+.norma-card.warning{border-left:3px solid var(--yellow);}
+.norma-card.info{border-left:3px solid var(--cyan);}
+
+.norma-header{
+  padding:24px 28px 20px;
+  display:flex;align-items:flex-start;gap:16px;
+  cursor:pointer;
+  user-select:none;
+}
+.norma-emoji{font-size:28px;flex-shrink:0;margin-top:2px;}
+.norma-header-text{flex:1;}
+.norma-num{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.norma-title{font-family:var(--serif);font-size:22px;line-height:1.2;}
+.norma-toggle{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:var(--muted);font-size:14px;
+  transition:all .3s;margin-top:4px;
+}
+.norma-card.open .norma-toggle{background:rgba(255,0,80,.1);border-color:rgba(255,0,80,.3);color:var(--red);transform:rotate(45deg);}
+
+.norma-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s ease,padding .3s;
+  padding:0 28px;
+}
+.norma-card.open .norma-body{max-height:800px;padding:0 28px 28px;}
+
+.norma-lead{
+  font-size:14px;color:var(--muted);
+  padding:12px 0 20px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:20px;
+}
+
+.sino-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:500px){.sino-grid{grid-template-columns:1fr;}}
+
+.sino-col-label{
+  font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+}
+.sino-col-label.no{color:var(--red);}
+.sino-col-label.si{color:var(--green);}
+
+.sino-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.sino-list li{
+  font-size:13px;line-height:1.4;
+  color:rgba(238,238,245,.7);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.sino-list li::before{flex-shrink:0;margin-top:1px;font-size:10px;font-weight:700;}
+.sino-list.no li::before{content:'✕';color:var(--red);}
+.sino-list.si li::before{content:'✓';color:var(--green);}
+
+.norma-note{
+  margin-top:16px;padding:12px 16px;
+  background:rgba(255,255,255,.03);border-radius:10px;
+  font-size:12px;color:var(--muted);line-height:1.5;
+}
+.norma-note strong{color:var(--text);}
+
+.source-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,242,234,.06);
+  border:1px solid rgba(0,242,234,.15);
+  color:var(--cyan);
+  padding:8px 16px;border-radius:100px;
+  text-decoration:none;font-size:12px;font-weight:600;
+  transition:all .2s;margin-top:16px;
+  cursor:pointer;
+}
+.source-btn:hover{background:rgba(0,242,234,.12);transform:translateY(-1px);}
+
+/* ENTIERRA GRID */
+.entierra-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0;}
+@media(max-width:600px){.entierra-grid{grid-template-columns:1fr;}}
+
+.entierra-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:20px;padding:24px;
+  transition:border-color .3s,transform .2s;
+}
+.entierra-card:hover{border-color:rgba(255,204,0,.2);transform:translateY(-2px);}
+.entierra-icon{font-size:28px;margin-bottom:12px;display:block;}
+.entierra-title{font-family:var(--serif);font-size:18px;margin-bottom:8px;}
+.entierra-text{font-size:13px;color:var(--muted);line-height:1.6;margin:0!important;}
+
+/* ALGORITMO VISUAL */
+.algo-flow{
+  display:flex;flex-direction:column;gap:0;
+  margin:32px 0;
+  border:1px solid var(--border2);border-radius:24px;overflow:hidden;
+}
+.algo-step{
+  display:grid;grid-template-columns:60px 1fr;
+  border-bottom:1px solid var(--border);
+}
+.algo-step:last-child{border-bottom:none;}
+.algo-step-num{
+  background:rgba(255,0,80,.06);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:28px;
+  color:rgba(255,0,80,.4);
+  border-right:1px solid var(--border);
+}
+.algo-step-content{padding:24px 28px;}
+.algo-step-title{font-family:var(--serif);font-size:18px;margin-bottom:6px;}
+.algo-step-text{font-size:13px;color:var(--muted);line-height:1.6;margin:0!important;}
+
+/* CIERRE - THE CLOSER */
+.closer{
+  margin-top:100px;
+  position:relative;overflow:hidden;
+}
+.closer-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255,0,80,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 80% 100%, rgba(0,242,234,.08) 0%, transparent 60%);
+  border-radius:32px;
+}
+.closer-border{
+  position:absolute;inset:0;border-radius:32px;
+  background:linear-gradient(135deg,rgba(255,0,80,.3),rgba(0,242,234,.2));
+  padding:1px;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+.closer-inner{
+  position:relative;z-index:1;
+  padding:80px 60px;text-align:center;
+}
+@media(max-width:600px){.closer-inner{padding:48px 28px;}}
+
+.closer-eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--red);margin-bottom:24px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.closer-eyebrow::before,.closer-eyebrow::after{content:'';width:40px;height:1px;background:rgba(255,0,80,.4);}
+
+.closer-title{
+  font-family:var(--serif);
+  font-size:clamp(36px,7vw,72px);
+  line-height:1.0;margin-bottom:32px;
+}
+.closer-title em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--red),var(--orange),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.closer-body{
+  max-width:600px;margin:0 auto 48px;
+  text-align:left;
+  display:flex;flex-direction:column;gap:20px;
+}
+.closer-body p{
+  font-size:17px;line-height:1.75;
+  color:rgba(238,238,245,.85);
+  margin:0!important;
+}
+.closer-body p strong{color:var(--text);}
+
+.closer-question{
+  font-family:var(--serif);
+  font-size:clamp(28px,5vw,48px);
+  font-style:italic;
+  margin:40px 0 48px;
+  background:linear-gradient(135deg,var(--text),rgba(238,238,245,.6));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.closer-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  max-width:600px;margin:0 auto 48px;
+}
+@media(max-width:500px){.closer-cards{grid-template-columns:1fr;}}
+
+.closer-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border2);
+  border-radius:16px;padding:20px;text-align:center;
+  transition:all .3s;
+}
+.closer-card:hover{background:rgba(255,0,80,.06);border-color:rgba(255,0,80,.2);transform:translateY(-3px);}
+.closer-card-icon{font-size:28px;margin-bottom:8px;display:block;}
+.closer-card-text{font-size:12px;color:var(--muted);line-height:1.5;}
+.closer-card-text strong{color:var(--text);display:block;margin-bottom:2px;font-size:13px;}
+
+.closer-final{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(22px,4vw,36px);
+  color:var(--text);
+}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:20px 0;}
+
+/* FOOTER */
+footer{
+  text-align:center;padding:48px 24px;
+  color:var(--muted);font-size:12px;letter-spacing:.05em;
+  border-top:1px solid var(--border);
+  position:relative;z-index:1;
+}
+footer a{color:var(--cyan);text-decoration:none;}
+
+@media(max-width:600px){
+  .big-number-block{grid-template-columns:1fr;text-align:center;}
+  .big-number{font-size:60px;}
+  .nav{padding:14px 20px;}
+  .hero-stat-row{flex-direction:column;}
+  .hero-stat{border-right:none;border-bottom:1px solid var(--border2);}
+  .hero-stat:last-child{border-bottom:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+
+<nav class="nav">
+  <div class="nav-logo">TikTok LIVE — Agencia</div>
+  <div class="nav-count" id="navCount">Leyendo...</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="geo geo-1"></div>
+  <div class="geo geo-2"></div>
+  <div class="geo geo-3"></div>
+  <div class="geo geo-4"></div>
+  <div class="geo geo-5"></div>
+
+  <div class="hero-eyebrow"><span></span> Educación para creadores</div>
+  <h1 class="hero-title">Lo que TikTok<br><em>no te explica.</em></h1>
+  <p class="hero-sub">Alguien leyó el reglamento por ti. Aquí está todo, en palabras de humano, sin rodeos.</p>
+
+  <div class="hero-stat-row">
+    <div class="hero-stat">
+      <span class="hero-stat-num">99%</span>
+      <span class="hero-stat-label">Eliminado sin reportes</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">11</span>
+      <span class="hero-stat-label">Cosas que tumban tu live</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">5min</span>
+      <span class="hero-stat-label">Para leer todo esto</span>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Desliza</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="content">
+
+<!-- INTRO -->
+<section class="section">
+  <div class="section-num">Introducción</div>
+  <h2 class="section-title">Oye, <em>un momento.</em></h2>
+
+  <div class="intro-card">
+    <span class="intro-card-icon">☕</span>
+    <p>Antes de que sigas transmitiendo, necesito contarte algo. TikTok tiene un documento enorme con todas sus reglas. Páginas y páginas de letra chica que honestamente nadie lee. Y lo entiendo, da flojera, parece aburrido, y siempre hay algo más urgente que hacer.</p>
+  </div>
+
+  <p>El problema es que ese documento existe. Y TikTok lo aplica aunque tú no lo hayas leído.</p>
+  <p>Así que lo que hice fue leerlo por ti, entender lo que realmente importa, y traducírtelo en palabras de humano. Sin tecnicismos, sin rodeos, sin pendejadas.</p>
+  <p>No te voy a decir todo lo que dice TikTok. Te voy a decir lo que necesitas saber para <strong>no perder tu cuenta, no perder tu monetización, y no quedarte preguntándote por qué el algoritmo te enterró.</strong></p>
+
+  <div class="highlight">Tómate 5 minutos. Vale la pena.</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EL MITO -->
+<section class="section">
+  <div class="section-num">Lo más importante</div>
+  <h2 class="section-title">El mito de<br><em>los reportes.</em></h2>
+
+  <p>Cada vez que alguien pierde un live o le tumban un video, pasa lo mismo. Lo primero que dicen es: <em>"me reportaron."</em></p>
+  <p>Y casi siempre están equivocados. Aquí los números que TikTok publicó en su propio reporte oficial:</p>
+
+  <div class="big-number-block">
+    <div class="big-number">99%</div>
+    <div class="big-number-text">
+      <strong>Eliminado antes de que alguien lo reportara</strong>
+      <p>En el primer trimestre de 2025, más del 99% del contenido que violó las normas fue eliminado antes de que alguien lo reportara. Más del 90% fue eliminado antes de que alguien siquiera lo viera.</p>
+    </div>
+  </div>
+
+  <p>Léelo de nuevo. <strong>El 99% eliminado sin reportes.</strong> Eso significa que los reportes casi no importan. El sistema detectó el problema antes de que llegaras tú a quejarte.</p>
+
+  <div class="callout callout-red">
+    <span class="callout-icon">🤖</span>
+    <div class="callout-title">¿Cómo lo hace TikTok?</div>
+    <p>Usa detección automática que revisa todo el contenido contra sus normas. Si su tecnología identifica algo como potencialmente violatorio, lo elimina automáticamente o lo manda a revisión humana. Analiza tu voz, tus palabras, tus gestos, el contexto. Y aprende.</p>
+  </div>
+
+  <p>Entonces la próxima vez que pierdas un live o te bajen un video, para un momento antes de culpar a alguien. Pregúntate qué hiciste que el sistema detectó como problema. Porque casi con seguridad, nadie tuvo que reportarte.</p>
+
+  <div class="highlight">"El sistema ya estaba viendo."</div>
+
+  <a class="source-btn" href="https://www.tiktok.com/transparency/en/community-guidelines-enforcement-2025-1" target="_blank">🔗 Ver reporte oficial de transparencia TikTok Q1 2025 →</a>
+</section>
+
+<div class="divider"></div>
+
+<!-- LAS NORMAS -->
+<section class="section">
+  <div class="section-num">Las reglas reales</div>
+  <h2 class="section-title">Las 11 cosas que<br><em>tumban tu live.</em></h2>
+  <p>Sin tecnicismos. Sin letra chica. Toca cada una para ver los detalles.</p>
+
+  <div class="normas-grid">
+
+    <!-- 1 -->
+    <div class="norma-card danger" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">🔞</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 01</div>
+          <div class="norma-title">Contenido sexual, aunque no enseñes nada</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">TikTok es extremadamente sensible aquí. No necesitas estar desnudo para que te sancionen. La IA detecta posturas, gestos y movimientos. Y lo que más sorprende: no importa que sea broma. El sistema no entiende sarcasmo.</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Prohibido</div>
+            <ul class="sino-list no">
+              <li>Bailes exageradamente sugestivos</li>
+              <li>Chupar objetos de forma provocativa</li>
+              <li>Gemidos exagerados</li>
+              <li>Enfocar partes del cuerpo</li>
+              <li>Gestos o movimientos sexuales</li>
+              <li>Desnudos o semidesnudos</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Permitido</div>
+            <ul class="sino-list si">
+              <li>Bailar de forma normal</li>
+              <li>Ropa normal</li>
+              <li>Fitness y deporte</li>
+              <li>Contenido casual</li>
+            </ul>
+          </div>
+        </div>
+        <div class="norma-note"><strong>La IA detecta posturas y gestos,</strong> no solo desnudos. Aunque no enseñes nada, el sistema puede clasificarlo como sugestivo.</div>
+        <a class="source-btn" href="https://www.tiktok.com/live/creators/en-US/article/tiktok-live-creators-rules_and_guidance-live_monetization_guidelines-es_ES?name=undefined" target="_blank">🔗 Normas de monetización LIVE — TikTok →</a>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="norma-card danger" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">🤬</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 02</div>
+          <div class="norma-title">Insultar o humillar, aunque sea "de carrilla"</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">El sistema registra la frase, no la intención. "Pareces retrasado, es broma" sigue siendo una violación. La diferencia entre carrilla y violación es simple: ¿estás compitiendo o estás humillando?</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Prohibido</div>
+            <ul class="sino-list no">
+              <li>Insultar directamente a alguien</li>
+              <li>Burlarte del físico de alguien</li>
+              <li>Amenazar aunque sea broma</li>
+              <li>Humillar a otro creador</li>
+              <li>Palabras discriminatorias</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Permitido</div>
+            <ul class="sino-list si">
+              <li>Bromear sin insultar</li>
+              <li>Batallas de competencia</li>
+              <li>Carrilla ligera sin humillar</li>
+              <li>Crítica con respeto</li>
+            </ul>
+          </div>
+        </div>
+        <div class="norma-note">TikTok actualizó sus normas específicamente para <strong>perfeccionar las reglas sobre acoso</strong>, con lenguaje más claro. Vigentes desde septiembre 2025.</div>
+        <a class="source-btn" href="https://newsroom.tiktok.com/actualizacion-normas-de-la-comunidad-de-tiktok-2025?lang=es" target="_blank">🔗 Actualización normas TikTok 2025 →</a>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="norma-card warning" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">🖼️</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 03</div>
+          <div class="norma-title">La imagen estática. El que nadie te explica.</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">Poner una foto de fondo, poner música y desaparecer. O quedarse callado sin moverse. TikTok lo tiene documentado: un live sin actividad real se clasifica como contenido de baja calidad. Las consecuencias son directas.</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Prohibido</div>
+            <ul class="sino-list no">
+              <li>Live con foto o imagen fija</li>
+              <li>Live con pantalla negra</li>
+              <li>Live sin hablar ni moverse</li>
+              <li>Solo música sin presencia</li>
+              <li>Cubrir el rostro con efectos</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Lo correcto</div>
+            <ul class="sino-list si">
+              <li>Estar presente en cámara</li>
+              <li>Hablar con tu audiencia</li>
+              <li>Interactuar con comentarios</li>
+              <li>Hacer batallas activas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="norma-note">TikTok recomienda explícitamente que los creadores <strong>estén presentes y en pantalla durante toda la duración del LIVE.</strong></div>
+        <a class="source-btn" href="https://www.tiktok.com/live/studio/help/article/Before-you-go-LIVE/Community-Guidelines?lang=es" target="_blank">🔗 TikTok LIVE Studio — Normas →</a>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="norma-card warning" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">🎁</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 04</div>
+          <div class="norma-title">Pedir regalos con chantaje o presión</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">Sí puedes recibir regalos. Sí puedes tener metas. Lo que no puedes es presionar, manipular o humillar para conseguirlos. TikTok lo tiene documentado oficialmente.</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Prohibido</div>
+            <ul class="sino-list no">
+              <li>"Si no mandan regalo cierro"</li>
+              <li>"Los pobres no comenten"</li>
+              <li>"Si no donas te bloqueo"</li>
+              <li>Chantaje emocional</li>
+              <li>Usar necesidad económica para pedir</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Permitido</div>
+            <ul class="sino-list si">
+              <li>Agradecer regalos</li>
+              <li>"Si llegamos a X hago Y"</li>
+              <li>Metas divertidas</li>
+              <li>Dinámicas entretenidas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="norma-note"><strong>Fuente oficial TikTok:</strong> "No se puede monetizar contenido donde el creador aprovecha sus necesidades financieras para pedir regalos."</div>
+        <a class="source-btn" href="https://www.tiktok.com/live/creators/en-US/article/tiktok-live-creators-rules_and_guidance-live_monetization_guidelines-es_ES?name=undefined" target="_blank">🔗 Normas de monetización LIVE →</a>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="norma-card danger" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">🍺</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 05</div>
+          <div class="norma-title">Drogas, alcohol y productos regulados</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">TikTok consolidó en una sola política todo lo relacionado con apuestas, alcohol, tabaco, drogas y armas. No puedes mostrar, promover ni vender ninguno en tu live, aunque sea "de fondo."</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Prohibido</div>
+            <ul class="sino-list no">
+              <li>Consumir drogas en cámara</li>
+              <li>Promover venta de sustancias</li>
+              <li>Mostrar armas de forma intimidante</li>
+              <li>Promover apuestas ilegales</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Contexto permitido</div>
+            <ul class="sino-list si">
+              <li>Contenido educativo sobre el tema</li>
+              <li>Noticias o discusión informada</li>
+              <li>Sin promoción ni venta</li>
+            </ul>
+          </div>
+        </div>
+        <a class="source-btn" href="https://newsroom.tiktok.com/actualizacion-normas-de-la-comunidad-de-tiktok-2025?lang=es" target="_blank">🔗 Política unificada de productos regulados →</a>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="norma-card danger" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">⚠️</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 06</div>
+          <div class="norma-title">Actividades peligrosas que la gente pueda imitar</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">Si lo haces en tu live y alguien lo imita y se lastima, TikTok te responsabiliza. Así de directo. No importa que hayas dicho "no hagan esto en casa."</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Prohibido</div>
+            <ul class="sino-list no">
+              <li>Retos que impliquen daño físico</li>
+              <li>Uso de cuchillos, hachas, fuegos artificiales</li>
+              <li>Comportamientos de riesgo sin formación</li>
+              <li>Autolesiones en cámara</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Permitido</div>
+            <ul class="sino-list si">
+              <li>Retos divertidos y seguros</li>
+              <li>Deportes con equipo apropiado</li>
+              <li>Habilidades con contexto profesional</li>
+            </ul>
+          </div>
+        </div>
+        <a class="source-btn" href="https://www.tiktok.com/live/creators/en-US/article/tiktok-live-creators-rules_and_guidance-live_monetization_guidelines-es_ES?name=undefined" target="_blank">🔗 Normas de monetización LIVE →</a>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="norma-card warning" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">🎰</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 07</div>
+          <div class="norma-title">Engaños, sorteos trampa y promesas falsas</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">Prometer dinero a cambio de regalos. Sorteos que nunca se realizan. Hacerte pasar por otra persona. Aquí sí funciona el reporte porque hay víctimas directas. Y el sistema lo detecta como engaño.</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Prohibido</div>
+            <ul class="sino-list no">
+              <li>"Si mandas X te mando dinero"</li>
+              <li>Sorteos que nunca ocurren</li>
+              <li>Hacerse pasar por otra persona</li>
+              <li>Promesas falsas de cualquier tipo</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Permitido</div>
+            <ul class="sino-list si">
+              <li>Metas reales y cumplibles</li>
+              <li>Retos honestos</li>
+              <li>Sorteos que sí realizas</li>
+            </ul>
+          </div>
+        </div>
+        <a class="source-btn" href="https://newsroom.tiktok.com/actualizacion-normas-de-la-comunidad-de-tiktok-2025?lang=es" target="_blank">🔗 Política de integridad y autenticidad →</a>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="norma-card warning" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">📲</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 08</div>
+          <div class="norma-title">Mandar a tu audiencia fuera de TikTok</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">TikTok quiere que todo pase dentro de su plataforma. Si mandas tráfico afuera de forma insistente, el sistema lo penaliza. No es personal. Es negocio.</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Evitar</div>
+            <ul class="sino-list no">
+              <li>Dar tu número en cámara</li>
+              <li>Mandar a WhatsApp o Telegram</li>
+              <li>Mostrar QR de otras apps</li>
+              <li>Repetir insistentemente otras redes</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Permitido</div>
+            <ul class="sino-list si">
+              <li>Enlace en tu bio</li>
+              <li>Mención casual de otras redes</li>
+              <li>TikTok Shop integrado</li>
+            </ul>
+          </div>
+        </div>
+        <a class="source-btn" href="https://www.tiktok.com/community-guidelines/es?lang=es" target="_blank">🔗 Normas de integridad — TikTok →</a>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="norma-card info" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">🎵</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 09</div>
+          <div class="norma-title">Derechos de autor en tu live</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">Eres responsable de todo lo que suene o se vea en tu live. Incluyendo lo que generan herramientas de terceros que uses. El sistema lo detecta en segundos.</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Cuidado con</div>
+            <ul class="sino-list no">
+              <li>Partidos o eventos deportivos</li>
+              <li>Películas o series de fondo</li>
+              <li>Música sin licencia a volumen alto</li>
+              <li>Contenido de otras plataformas</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Seguro</div>
+            <ul class="sino-list si">
+              <li>Biblioteca de música TikTok</li>
+              <li>Tu propia voz y música</li>
+              <li>Contenido original tuyo</li>
+            </ul>
+          </div>
+        </div>
+        <div class="norma-note"><strong>Dato importante:</strong> TikTok dice que eres responsable incluso de herramientas de terceros como traductores o transcriptores durante el live.</div>
+        <a class="source-btn" href="https://www.tiktok.com/live/studio/help/article/Before-you-go-LIVE/Community-Guidelines?lang=es" target="_blank">🔗 Normas de derechos de autor LIVE →</a>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="norma-card info" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">🤖</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 10</div>
+          <div class="norma-title">IA y deepfakes sin avisar</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">Regla nueva y cada vez más estricta. Si usas inteligencia artificial en tu contenido, tienes que decirlo. Suplantar a alguien o manipular voces ajenas sin aviso es violación directa.</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Prohibido</div>
+            <ul class="sino-list no">
+              <li>Suplantar a otra persona con IA</li>
+              <li>Deepfakes sin declarar</li>
+              <li>Manipular voz o rostro ajeno</li>
+              <li>Difundir información falsa con IA</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Permitido</div>
+            <ul class="sino-list si">
+              <li>IA declarada claramente</li>
+              <li>Filtros y efectos normales</li>
+              <li>Contenido creativo con IA propia</li>
+            </ul>
+          </div>
+        </div>
+        <a class="source-btn" href="https://newsroom.tiktok.com/actualizacion-normas-de-la-comunidad-de-tiktok-2025?lang=es" target="_blank">🔗 Política de IA y autenticidad 2025 →</a>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="norma-card warning" onclick="toggleNorma(this)">
+      <div class="norma-header">
+        <div class="norma-emoji">😴</div>
+        <div class="norma-header-text">
+          <div class="norma-num">Norma 11</div>
+          <div class="norma-title">Lives largos sin actividad real</div>
+        </div>
+        <div class="norma-toggle">+</div>
+      </div>
+      <div class="norma-body">
+        <div class="norma-lead">Horas en live sin hablar, sin batallas, sin interacción. Solo música y tú mirando el techo. No te sanciona de golpe. Te entierra. Y mientras crees que acumulas horas, acumulas señales negativas.</div>
+        <div class="sino-grid">
+          <div>
+            <div class="sino-col-label no">❌ Señales negativas</div>
+            <ul class="sino-list no">
+              <li>Horas sin hablar</li>
+              <li>Sin responder comentarios</li>
+              <li>Sin batallas ni dinámicas</li>
+              <li>Audiencia que se va rápido</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sino-col-label si">✅ Lo que funciona</div>
+            <ul class="sino-list si">
+              <li>Presencia activa y constante</li>
+              <li>Responder comentarios</li>
+              <li>Batallas y retos seguidos</li>
+              <li>Dinámicas que retienen</li>
+            </ul>
+          </div>
+        </div>
+        <div class="norma-note"><strong>Experiencia real:</strong> Documentado en creadores de la agencia. TikTok clasifica este contenido como "no interactivo" y reduce su distribución.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LO QUE TE ENTIERRA -->
+<section class="section">
+  <div class="section-num">Más allá de las sanciones</div>
+  <h2 class="section-title">Lo que te entierra<br><em>sin que te enteres.</em></h2>
+
+  <p>Hay cosas que TikTok no te sanciona directamente. No te manda aviso. No te da strike. No te dice nada. Simplemente... deja de mostrarte.</p>
+  <p>Un día tienes 200 personas en tu live. Al siguiente 40. Y no entiendes por qué. Y empiezas a culpar al algoritmo, a los reportes, a la competencia. Pero la respuesta casi siempre está en ti.</p>
+
+  <div class="entierra-grid">
+    <div class="entierra-card">
+      <span class="entierra-icon">🚪</span>
+      <div class="entierra-title">La gente se va en segundos</div>
+      <p class="entierra-text">Si alguien entra y se sale inmediatamente, el sistema interpreta: "esto no vale la pena." Si pasa seguido, deja de recomendarte. La pregunta no es "¿por qué no llega gente?" sino "¿por qué la que llega se va?"</p>
+    </div>
+    <div class="entierra-card">
+      <span class="entierra-icon">🔁</span>
+      <div class="entierra-title">Siempre lo mismo</div>
+      <p class="entierra-text">El mismo saludo, la misma dinámica, el mismo cierre cada día. La gente se aburre. No tienes que reinventarte, pero sí darle una razón para quedarse hoy específicamente.</p>
+    </div>
+    <div class="entierra-card">
+      <span class="entierra-icon">🙏</span>
+      <div class="entierra-title">La rogadera desesperada</div>
+      <p class="entierra-text">"Dale like si me quieres. Comparte comparte." La gente no vino a sentirse presionada. Vino a entretenerse. La incomodidad los saca. Y el algoritmo registra cada salida.</p>
+    </div>
+    <div class="entierra-card">
+      <span class="entierra-icon">👻</span>
+      <div class="entierra-title">El live que nadie sabe que existe</div>
+      <p class="entierra-text">Sin título, sin contexto. TikTok en 2026 usa palabras clave para mostrar tu live a quien busca ese contenido. Si tu título está vacío, el sistema no sabe a quién mandarte.</p>
+    </div>
+    <div class="entierra-card">
+      <span class="entierra-icon">📉</span>
+      <div class="entierra-title">Presente pero ausente</div>
+      <p class="entierra-text">Estás en live pero sin energía, sin mirar a cámara, sin reaccionar. Técnicamente estás. En la práctica, no. La audiencia lo siente. Y se va.</p>
+    </div>
+    <div class="entierra-card">
+      <span class="entierra-icon">🎯</span>
+      <div class="entierra-title">Lo que todo esto tiene en común</div>
+      <p class="entierra-text">No es el algoritmo. No son los reportes. Es que el live no le está dando nada a quien lo ve. Dales una razón para quedarse. El algoritmo hace el resto.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ALGORITMO -->
+<section class="section">
+  <div class="section-num">El sistema por dentro</div>
+  <h2 class="section-title">El algoritmo no<br><em>es tu enemigo.</em></h2>
+
+  <p>Solo es un juez muy frío. No tiene favoritos. No le caes bien ni mal. No sabe quién eres. Solo mira números. Y según esos números, decide si te muestra a más gente o te entierra.</p>
+
+  <div class="algo-flow">
+    <div class="algo-step">
+      <div class="algo-step-num">1</div>
+      <div class="algo-step-content">
+        <div class="algo-step-title">¿Cuánto tiempo se queda la gente?</div>
+        <p class="algo-step-text">Es la señal más importante. Si alguien entra y se queda 10 minutos, el sistema interpreta: "aquí hay algo que vale la pena." No importa cuántas personas entren. Importa cuánto tiempo se quedan.</p>
+      </div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-step-num">2</div>
+      <div class="algo-step-content">
+        <div class="algo-step-title">¿Están interactuando?</div>
+        <p class="algo-step-text">Comentarios, regalos, follows, reacciones. Un live con 50 personas que interactúan vale más que uno con 500 que solo miran en silencio. La interacción es la moneda del algoritmo.</p>
+      </div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-step-num">3</div>
+      <div class="algo-step-content">
+        <div class="algo-step-title">¿El contenido es auténtico y de calidad?</div>
+        <p class="algo-step-text">TikTok introdujo directrices que aseguran que solo los contenidos auténticos puedan beneficiarse de las herramientas de ingresos. Si tu live se ve descuidado o sin propósito, el sistema reduce su distribución.</p>
+      </div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-step-num">4</div>
+      <div class="algo-step-content">
+        <div class="algo-step-title">Las batallas son gasolina pura</div>
+        <p class="algo-step-text">Cuando haces una batalla, fusionas dos audiencias. El sistema detecta ese pico de actividad y emoción en tiempo real. Y lo premia mostrándote a más gente. No es casualidad que los creadores con más batallas crezcan más rápido. Es matemática.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-cyan">
+    <span class="callout-icon">💡</span>
+    <div class="callout-title">La regla de oro del LIVE en 2026</div>
+    <p>No transmitas para el algoritmo. Transmite para la persona que está viendo en este momento. Si esa persona se queda, si sonríe, si comenta, si siente algo... el algoritmo se encarga del resto.</p>
+  </div>
+
+  <a class="source-btn" href="https://newsroom.tiktok.com/tiktok-live-seguridad-de-los-usuarios?lang=es" target="_blank">🔗 TikTok LIVE — Actualizaciones oficiales →</a>
+</section>
+
+<div class="divider"></div>
+
+<!-- CIERRE GLORIOSO -->
+<section class="section">
+  <div class="closer">
+    <div class="closer-bg"></div>
+    <div class="closer-border"></div>
+    <div class="closer-inner">
+
+      <div class="closer-eyebrow">El cierre</div>
+
+      <h2 class="closer-title">La mesa<br>siempre está<br><em>puesta.</em></h2>
+
+      <div class="closer-body">
+        <p>La gente que gana en TikTok no gana porque tuvo suerte. Gana porque <strong>entendió el juego antes que los demás</strong> y no paró de jugar.</p>
+        <p>Cada live que no hiciste fue una mano que no jugaste. Cada batalla que evitaste fue una apuesta que nunca hiciste. Cada día que esperaste a "estar listo" fue un día que alguien más estuvo construyendo lo que tú podrías haber construido.</p>
+        <p><strong>TikTok no premia al más talentoso. Premia al que más veces se sienta a jugar.</strong></p>
+      </div>
+
+      <div class="closer-cards">
+        <div class="closer-card">
+          <span class="closer-card-icon">🎯</span>
+          <div class="closer-card-text"><strong>No perfección</strong>Necesitas ser constante</div>
+        </div>
+        <div class="closer-card">
+          <span class="closer-card-icon">⚡</span>
+          <div class="closer-card-text"><strong>No claridad</strong>Necesitas empezar</div>
+        </div>
+        <div class="closer-card">
+          <span class="closer-card-icon">🔥</span>
+          <div class="closer-card-text"><strong>No miles de seguidores</strong>Necesitas aparecer hoy</div>
+        </div>
+      </div>
+
+      <div class="closer-body" style="text-align:center;">
+        <p>El que gana en esta plataforma no es el más bonito, ni el más chistoso, ni el que tiene mejor cámara. Es el que está cuando los demás ya se cansaron.</p>
+      </div>
+
+      <div class="closer-question">¿Vas a estar?</div>
+
+      <div class="closer-final">Ahora ya sabes el juego.<br><em>Juégalo.</em></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>Educación para creadores — Agencia TikTok LIVE &nbsp;·&nbsp; Basado en <a href="https://www.tiktok.com/community-guidelines/es?lang=es" target="_blank">políticas oficiales de TikTok</a> vigentes 2024–2026</p>
+  <p style="margin-top:8px;">Reporte de transparencia Q1 2025 · Normas de monetización LIVE · Actualizaciones septiembre 2025</p>
+</footer>
+
+<script>
+// PROGRESS + NAV COUNT
+window.addEventListener('scroll',()=>{
+  const s=document.body.scrollTop||document.documentElement.scrollTop;
+  const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.getElementById('prog').style.width=(s/h*100)+'%';
+  const pct=Math.round(s/h*100);
+  document.getElementById('navCount').textContent=pct>0?`${pct}% leído`:'Inicio';
+});
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.08});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+
+// TOGGLE NORMAS
+function toggleNorma(card){
+  const wasOpen=card.classList.contains('open');
+  document.querySelectorAll('.norma-card.open').forEach(c=>c.classList.remove('open'));
+  if(!wasOpen)card.classList.add('open');
+}
+</script>
+
+</body>
+</html>
